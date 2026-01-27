@@ -1,0 +1,33 @@
+{% extends 'fefu_lab/base.html' %}
+
+{% block title %}О нас | FEFU Lab{% endblock %}
+
+{% block content %}
+    <h1>ℹ️ О нас</h1>
+    
+    <div class="card">
+        <h2> Дальневосточный федеральный университет</h2>
+        <p>Это учебный проект для лабораторной работы по веб-технологиям.</p>
+    </div>
+    
+    <div class="card">
+        <h2> Автор:</h2>
+        <p><strong>ФИО:</strong> [Ваше ФИО]</p>
+        <p><strong>Группа:</strong> [Ваша группа]</p>
+        <p><strong>Дисциплина:</strong> Веб-технологии</p>
+        <p><strong>Преподаватель:</strong> Шалнев И.Д.</p>
+    </div>
+    
+    <div class="card">
+        <h2> Требования к работе:</h2>
+        <ul style="margin-left: 20px; margin-top: 10px;">
+            <li>Python 3.8+</li>
+            <li>Django 4.2+</li>
+            <li>Git</li>
+            <li>4 маршрута (2 статических, 2 динамических)</li>
+            <li>Function-Based и Class-Based Views</li>
+        </ul>
+    </div>
+    
+    <a href="/" class="btn">← На главную</a>
+{% endblock %}

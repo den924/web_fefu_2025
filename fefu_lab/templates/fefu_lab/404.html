@@ -1,0 +1,12 @@
+{% extends 'fefu_lab/base.html' %}
+
+{% block title %}404 - Страница не найдена | FEFU Lab{% endblock %}
+
+{% block content %}
+    <div style="text-align: center; padding: 50px 0;">
+        <h1 style="font-size: 100px; color: #e74c3c;">404</h1>
+        <h2>Страница не найдена</h2>
+        <p style="margin: 20px 0;">Запрашиваемая страница не существует.</p>
+        <a href="{% url 'home' %}" class="btn">Вернуться на главную</a>
+    </div>
+{% endblock %}

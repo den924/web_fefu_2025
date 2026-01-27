@@ -1,0 +1,494 @@
+{% extends 'fefu_lab/base.html' %}
+
+{% block title %}{{ student.name }} | Профиль студента | FEFU Lab{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Контейнер профиля */
+    .profile-container {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 20px;
+        padding: 30px;
+        margin-bottom: 30px;
+        color: white;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .profile-container::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(255, 255, 255, 0.1);
+        z-index: 1;
+    }
+    
+    .profile-content {
+        position: relative;
+        z-index: 2;
+    }
+    
+    /* Заголовок профиля */
+    .profile-header {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        margin-bottom: 30px;
+    }
+    
+    .avatar-container {
+        position: relative;
+    }
+    
+    .student-avatar-large {
+        width: 150px;
+        height: 150px;
+        background: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 70px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        border: 5px solid white;
+    }
+    
+    .avatar-badge {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        background: #4CAF50;
+        color: white;
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: bold;
+    }
+    
+    .profile-title h1 {
+        color: white;
+        margin-bottom: 5px;
+        font-size: 2.5rem;
+    }
+    
+    .profile-title p {
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+    }
+    
+    .student-id-badge {
+        display: inline-block;
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-size: 14px;
+        backdrop-filter: blur(10px);
+    }
+    
+    /* Основная информация */
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        margin: 30px 0;
+    }
+    
+    .stat-card {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 15px;
+        padding: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: transform 0.3s ease;
+    }
+    
+    .stat-card:hover {
+        transform: translateY(-5px);
+        background: rgba(255, 255, 255, 0.15);
+    }
+    
+    .stat-icon {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+    
+    .stat-value {
+        font-size: 1.8rem;
+        font-weight: bold;
+        margin: 10px 0;
+    }
+    
+    .stat-label {
+        font-size: 0.9rem;
+        opacity: 0.9;
+    }
+    
+    /* Карточки с информацией */
+    .info-cards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 25px;
+        margin: 40px 0;
+    }
+    
+    .info-card {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        border: 1px solid #e0e0e0;
+    }
+    
+    .info-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    }
+    
+    .info-card h3 {
+        color: #2c3e50;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 3px solid #667eea;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    /* Скиллы */
+    .skills-container {
+        margin-top: 15px;
+    }
+    
+    .skill-tag {
+        display: inline-block;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 8px 20px;
+        border-radius: 25px;
+        font-size: 14px;
+        margin: 5px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+    }
+    
+    .skill-tag:hover {
+        transform: scale(1.05);
+        border-color: #667eea;
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    }
+    
+    /* Курсы */
+    .course-card {
+        background: #f8f9fa;
+        border-radius: 10px;
+        padding: 15px;
+        margin: 10px 0;
+        border-left: 4px solid #667eea;
+        transition: all 0.3s ease;
+    }
+    
+    .course-card:hover {
+        background: #e3f2fd;
+        transform: translateX(5px);
+    }
+    
+    /* Достижения */
+    .achievement-item {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin: 15px 0;
+        padding: 15px;
+        background: #fff8e1;
+        border-radius: 10px;
+        border-left: 4px solid #ffb300;
+    }
+    
+    .achievement-icon {
+        font-size: 24px;
+        color: #ffb300;
+    }
+    
+    /* Поисковая форма */
+    .search-section {
+        background: #f8f9fa;
+        border-radius: 15px;
+        padding: 30px;
+        margin: 40px 0;
+        text-align: center;
+    }
+    
+    .search-form-inline {
+        display: flex;
+        gap: 10px;
+        max-width: 500px;
+        margin: 20px auto;
+    }
+    
+    .search-input {
+        flex: 1;
+        padding: 15px 20px;
+        border: 2px solid #667eea;
+        border-radius: 10px;
+        font-size: 16px;
+        outline: none;
+        transition: all 0.3s;
+    }
+    
+    .search-input:focus {
+        border-color: #764ba2;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+    }
+    
+    .search-button {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        padding: 15px 30px;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+    
+    .search-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+    }
+    
+    /* Кнопки навигации */
+    .navigation-buttons {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        margin-top: 30px;
+        flex-wrap: wrap;
+    }
+    
+    .nav-button {
+        background: white;
+        color: #667eea;
+        border: 2px solid #667eea;
+        padding: 12px 25px;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    
+    .nav-button:hover {
+        background: #667eea;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+    }
+    
+    .nav-button.primary {
+        background: #667eea;
+        color: white;
+    }
+    
+    .nav-button.primary:hover {
+        background: #5a67d8;
+    }
+    
+    /* Адаптивность */
+    @media (max-width: 768px) {
+        .profile-header {
+            flex-direction: column;
+            text-align: center;
+            gap: 20px;
+        }
+        
+        .student-avatar-large {
+            width: 120px;
+            height: 120px;
+            font-size: 50px;
+        }
+        
+        .stats-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .info-cards-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .search-form-inline {
+            flex-direction: column;
+        }
+        
+        .navigation-buttons {
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .nav-button {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    <!-- Профиль студента -->
+    <div class="profile-container">
+        <div class="profile-content">
+            <div class="profile-header">
+                <div class="avatar-container">
+                    <div class="student-avatar-large">
+                        {% if student.id == 1 %}👨‍🎓{% endif %}
+                        {% if student.id == 2 %}👩‍🎓{% endif %}
+                        {% if student.id == 3 %}👨‍💻{% endif %}
+                    </div>
+                    <div class="avatar-badge">
+                        {% if student.is_active %}АКТИВЕН{% else %}НЕАКТИВЕН{% endif %}
+                    </div>
+                </div>
+                
+                <div class="profile-title">
+                    <h1>{{ student.name }}</h1>
+                    <p>{{ student.faculty }}</p>
+                    <span class="student-id-badge">ID: {{ student.id }}</span>
+                </div>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">📚</div>
+                    <div class="stat-value">{{ student.year }}</div>
+                    <div class="stat-label">Курс</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">⭐</div>
+                    <div class="stat-value">{{ student.gpa }}</div>
+                    <div class="stat-label">Средний балл</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">🎓</div>
+                    <div class="stat-value">{{ student.enrollment_year }}</div>
+                    <div class="stat-label">Год поступления</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-value">{{ student.group }}</div>
+                    <div class="stat-label">Группа</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Основные блоки информации -->
+    <div class="info-cards-grid">
+        <!-- Скиллы -->
+        <div class="info-card">
+            <h3>🎯 Навыки и умения</h3>
+            <div class="skills-container">
+                {% for skill in student.skills %}
+                <span class="skill-tag">{{ skill }}</span>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <!-- Курсы -->
+        {% if student.courses %}
+        <div class="info-card">
+            <h3>📖 Изучаемые курсы</h3>
+            {% for course in student.courses %}
+            <a href="{% url 'course_detail' course_slug=course.slug %}" style="text-decoration: none;">
+                <div class="course-card">
+                    <div style="font-weight: bold; color: #2c3e50;">{{ course.name }}</div>
+                    <div style="color: #7f8c8d; font-size: 14px; margin-top: 5px;">
+                        Нажмите для подробной информации
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+    
+    <!-- Биография -->
+    <div class="info-card">
+        <h3>📝 Биография</h3>
+        <p style="line-height: 1.8; font-size: 16px; color: #34495e;">
+            {{ student.bio }}
+        </p>
+    </div>
+    
+    <!-- Достижения -->
+    {% if student.achievements %}
+    <div class="info-card">
+        <h3>🏆 Достижения и награды</h3>
+        {% for achievement in student.achievements %}
+        <div class="achievement-item">
+            <div class="achievement-icon">🏅</div>
+            <div>{{ achievement }}</div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    
+    <!-- Поиск другого студента -->
+    <div class="search-section">
+        <h3>🔍 Поиск другого студента</h3>
+        <p>Введите имя студента для быстрого перехода к его профилю</p>
+        
+        <form method="GET" action="{% url 'search_student' %}" class="search-form-inline">
+            <input type="text" name="query" class="search-input" 
+                   placeholder="Например: Мария Петрова" 
+                   value="{{ student.name }}">
+            <button type="submit" class="search-button">
+                🔍 Найти студента
+            </button>
+        </form>
+        
+        <p style="color: #7f8c8d; margin-top: 15px; font-size: 14px;">
+            Доступные студенты: Иван Иванов, Мария Петрова, Алексей Сидоров
+        </p>
+    </div>
+    
+    <!-- Навигационные кнопки -->
+    <div class="navigation-buttons">
+        <a href="{% url 'home' %}" class="nav-button">
+            🏠 На главную
+        </a>
+        
+        <a href="{% url 'about' %}" class="nav-button">
+            ℹ️ О проекте
+        </a>
+        
+        {% for other_id in other_students %}
+        <a href="{% url 'student_profile' student_id=other_id %}" class="nav-button primary">
+            {% if other_id == 1 %}👨‍🎓 Иван Иванов{% endif %}
+            {% if other_id == 2 %}👩‍🎓 Мария Петрова{% endif %}
+            {% if other_id == 3 %}👨‍💻 Алексей Сидоров{% endif %}
+        </a>
+        {% endfor %}
+        
+        <a href="{% url 'course_detail' course_slug='python-basics' %}" class="nav-button">
+            📚 Все курсы
+        </a>
+    </div>
+    
+    <!-- Статистика внизу -->
+    <div style="text-align: center; margin-top: 50px; color: #7f8c8d; font-size: 14px;">
+        <p>Профиль просмотрен: {% now "H:i" %} • {% now "d.m.Y" %}</p>
+        <p>ДВФУ • Лабораторная работа №1 • Django Web Framework</p>
+    </div>
+{% endblock %}

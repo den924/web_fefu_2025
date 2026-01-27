@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+<header>
+    <nav>
+        <a href="{% url 'home' %}" class="logo">FEFU Lab</a>
+        <div style="display: flex; align-items: center; gap: 20px;">
+            <form method="GET" action="{% url 'search_student' %}" style="display: flex; gap: 5px;">
+                <input type="text" name="query" placeholder="Поиск студента..." 
+                       style="padding: 8px 12px; border: 1px solid #ddd; border-radius: 4px; width: 200px;">
+                <button type="submit" style="padding: 8px 15px; background: #3498db; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                    🔍
+                </button>
+            </form>
+            <div class="nav-links">
+                <a href="{% url 'home' %}">🏠 Главная</a>
+                <a href="{% url 'about' %}">ℹ️ О нас</a>
+                <a href="{% url 'course_detail' course_slug='python-basics' %}">📚 Курсы</a>
+            </div>
+        </div>
+    </nav>
+</header>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <a href="{% url 'home' %}" class="logo">FEFU Lab</a>
+                <div class="nav-links">
+                    <a href="{% url 'home' %}">🏠 Главная</a>
+                    <a href="{% url 'about' %}">ℹ️ О нас</a>
+                    <a href="{% url 'student_profile' student_id=1 %}">👨‍🎓 Студент 1</a>
+                    <a href="{% url 'course_detail' course_slug='python-basics' %}">📚 Python</a>
+                </div>
+            </nav>
+        </header>
+        
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+        
+        <footer>
+            <p>© {% now "Y" %} ДВФУ | Лабораторная работа №1</p>
+        </footer>
+    </div>
+    
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
