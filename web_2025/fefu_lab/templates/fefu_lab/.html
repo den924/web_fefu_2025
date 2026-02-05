@@ -1,0 +1,33 @@
+{% extends "fefu_lab/base.html" %}
+
+{% block content %}
+<div class="student-detail">
+    <h1>{{ student.full_name }}</h1>
+    
+    <div class="student-info">
+        <p><strong>Email:</strong> {{ student.email }}</p>
+        {% if student.birth_date %}
+            <p><strong>Дата рождения:</strong> {{ student.birth_date }}</p>
+        {% endif %}
+        <p><strong>Факультет:</strong> {{ student.get_faculty_display }}</p>
+        <p><strong>Дата регистрации:</strong> {{ student.created_at|date:"d.m.Y" }}</p>
+    </div>
+    
+    <h2>Записи на курсы</h2>
+    {% if enrollments %}
+        <div class="enrollments-list">
+            {% for enrollment in enrollments %}
+                <div class="enrollment-item">
+                    <h3>{{ enrollment.course.title }}</h3>
+                    <p><strong>Статус:</strong> {{ enrollment.get_status_display }}</p>
+                    <p><strong>Дата записи:</strong> {{ enrollment.enrolled_at|date:"d.m.Y" }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>Студент еще не записан ни на один курс.</p>
+    {% endif %}
+    
+    <a href="{% url 'student_list' %}" class="btn">Назад к списку студентов</a>
+</div>
+{% endblock %}

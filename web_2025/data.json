@@ -1,0 +1,963 @@
+[
+{
+  "model": "auth.permission",
+  "pk": 1,
+  "fields": {
+    "name": "Can add log entry",
+    "content_type": 1,
+    "codename": "add_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 2,
+  "fields": {
+    "name": "Can change log entry",
+    "content_type": 1,
+    "codename": "change_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 3,
+  "fields": {
+    "name": "Can delete log entry",
+    "content_type": 1,
+    "codename": "delete_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 4,
+  "fields": {
+    "name": "Can view log entry",
+    "content_type": 1,
+    "codename": "view_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 5,
+  "fields": {
+    "name": "Can add permission",
+    "content_type": 2,
+    "codename": "add_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 6,
+  "fields": {
+    "name": "Can change permission",
+    "content_type": 2,
+    "codename": "change_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 7,
+  "fields": {
+    "name": "Can delete permission",
+    "content_type": 2,
+    "codename": "delete_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 8,
+  "fields": {
+    "name": "Can view permission",
+    "content_type": 2,
+    "codename": "view_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 9,
+  "fields": {
+    "name": "Can add group",
+    "content_type": 3,
+    "codename": "add_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 10,
+  "fields": {
+    "name": "Can change group",
+    "content_type": 3,
+    "codename": "change_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 11,
+  "fields": {
+    "name": "Can delete group",
+    "content_type": 3,
+    "codename": "delete_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 12,
+  "fields": {
+    "name": "Can view group",
+    "content_type": 3,
+    "codename": "view_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 13,
+  "fields": {
+    "name": "Can add user",
+    "content_type": 4,
+    "codename": "add_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 14,
+  "fields": {
+    "name": "Can change user",
+    "content_type": 4,
+    "codename": "change_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 15,
+  "fields": {
+    "name": "Can delete user",
+    "content_type": 4,
+    "codename": "delete_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 16,
+  "fields": {
+    "name": "Can view user",
+    "content_type": 4,
+    "codename": "view_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 17,
+  "fields": {
+    "name": "Can add content type",
+    "content_type": 5,
+    "codename": "add_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 18,
+  "fields": {
+    "name": "Can change content type",
+    "content_type": 5,
+    "codename": "change_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 19,
+  "fields": {
+    "name": "Can delete content type",
+    "content_type": 5,
+    "codename": "delete_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 20,
+  "fields": {
+    "name": "Can view content type",
+    "content_type": 5,
+    "codename": "view_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 21,
+  "fields": {
+    "name": "Can add session",
+    "content_type": 6,
+    "codename": "add_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 22,
+  "fields": {
+    "name": "Can change session",
+    "content_type": 6,
+    "codename": "change_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 23,
+  "fields": {
+    "name": "Can delete session",
+    "content_type": 6,
+    "codename": "delete_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 24,
+  "fields": {
+    "name": "Can view session",
+    "content_type": 6,
+    "codename": "view_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 25,
+  "fields": {
+    "name": "Can add Студент",
+    "content_type": 7,
+    "codename": "add_student"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 26,
+  "fields": {
+    "name": "Can change Студент",
+    "content_type": 7,
+    "codename": "change_student"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 27,
+  "fields": {
+    "name": "Can delete Студент",
+    "content_type": 7,
+    "codename": "delete_student"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 28,
+  "fields": {
+    "name": "Can view Студент",
+    "content_type": 7,
+    "codename": "view_student"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 29,
+  "fields": {
+    "name": "Can add Преподаватель",
+    "content_type": 8,
+    "codename": "add_instructor"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 30,
+  "fields": {
+    "name": "Can change Преподаватель",
+    "content_type": 8,
+    "codename": "change_instructor"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 31,
+  "fields": {
+    "name": "Can delete Преподаватель",
+    "content_type": 8,
+    "codename": "delete_instructor"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 32,
+  "fields": {
+    "name": "Can view Преподаватель",
+    "content_type": 8,
+    "codename": "view_instructor"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 33,
+  "fields": {
+    "name": "Can add Запись на курс",
+    "content_type": 9,
+    "codename": "add_enrollment"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 34,
+  "fields": {
+    "name": "Can change Запись на курс",
+    "content_type": 9,
+    "codename": "change_enrollment"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 35,
+  "fields": {
+    "name": "Can delete Запись на курс",
+    "content_type": 9,
+    "codename": "delete_enrollment"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 36,
+  "fields": {
+    "name": "Can view Запись на курс",
+    "content_type": 9,
+    "codename": "view_enrollment"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 37,
+  "fields": {
+    "name": "Can add Курс",
+    "content_type": 10,
+    "codename": "add_course"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 38,
+  "fields": {
+    "name": "Can change Курс",
+    "content_type": 10,
+    "codename": "change_course"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 39,
+  "fields": {
+    "name": "Can delete Курс",
+    "content_type": 10,
+    "codename": "delete_course"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 40,
+  "fields": {
+    "name": "Can view Курс",
+    "content_type": 10,
+    "codename": "view_course"
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$R55LD7Ugsrg7V8bjxvOAGz$KVPvR9J5giNUUOaRZqNTuDdRRG5fZGRN7jdcKqSU7Ak=",
+    "last_login": "2025-11-29T11:36:37.799Z",
+    "is_superuser": true,
+    "username": "kali",
+    "first_name": "",
+    "last_name": "",
+    "email": "agyk.mkrtchan@gmail.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2025-11-16T09:13:16.294Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$f5VctY1hnPaG7Gw1KSi7Ie$T5jHRxInH7uJN8GbwZaz096kpJXpsZU5mmAxP+2CriE=",
+    "last_login": "2025-11-29T11:29:51.861Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "Андрей",
+    "last_name": "Администраторов",
+    "email": "admin@fefu.ru",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2025-11-29T10:49:21.945Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 3,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$uudOCWOHxvpdgLaL432KP0$nxMdGXmWNu9LWdKD7dJ2kj//gilCAyNYEJD/6MVfgOk=",
+    "last_login": "2025-11-29T11:28:03.356Z",
+    "is_superuser": false,
+    "username": "teacher1",
+    "first_name": "Иван",
+    "last_name": "Петров",
+    "email": "teacher1@fefu.ru",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-11-29T10:49:22.381Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 4,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$EmLpXQhaULbZj8IcgU8NTk$TzXgtLG/MAkSbBUulgciU6Pn1mZBoc4tbAEzNr0rvAI=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "teacher2",
+    "first_name": "Мария",
+    "last_name": "Сидорова",
+    "email": "teacher2@fefu.ru",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-11-29T10:49:22.803Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 5,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$9eWzXVgQjMPCC9ZOx2Er7z$SuXQP5mzkNhiLE5/IeQrZe6vaaWi6C4TBtP8nnsUgMw=",
+    "last_login": "2025-11-29T11:25:15.393Z",
+    "is_superuser": false,
+    "username": "student1",
+    "first_name": "Анна",
+    "last_name": "Иванова",
+    "email": "student1@fefu.ru",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-11-29T10:49:23.230Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 6,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$Anj1D4BBFAnUH4hbdq2pdt$38QAsCmpdvvswOE0E3BC97LqgJTPsZjKvrbRfmwUzC8=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "student2",
+    "first_name": "Дмитрий",
+    "last_name": "Смирнов",
+    "email": "student2@fefu.ru",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-11-29T10:49:23.659Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 1,
+  "fields": {
+    "app_label": "admin",
+    "model": "logentry"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 2,
+  "fields": {
+    "app_label": "auth",
+    "model": "permission"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 3,
+  "fields": {
+    "app_label": "auth",
+    "model": "group"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 4,
+  "fields": {
+    "app_label": "auth",
+    "model": "user"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 5,
+  "fields": {
+    "app_label": "contenttypes",
+    "model": "contenttype"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 6,
+  "fields": {
+    "app_label": "sessions",
+    "model": "session"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 7,
+  "fields": {
+    "app_label": "fefu_lab",
+    "model": "student"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 8,
+  "fields": {
+    "app_label": "fefu_lab",
+    "model": "instructor"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 9,
+  "fields": {
+    "app_label": "fefu_lab",
+    "model": "enrollment"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 10,
+  "fields": {
+    "app_label": "fefu_lab",
+    "model": "course"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "duoaiptsuzpksiizbfean99dn1d4yyss",
+  "fields": {
+    "session_data": ".eJxVi70OwiAQgN-F2TRA8QBHE5-D3HF3obE6SJmM764mHXT9fp6m4NhaGV0eZWFzMs4cfhlhvcr9K1R0lBVp2lGfLjdc1vMe_F0Ne_ssyaOPGWh2STAFAphRs83sUqjVMUch0OrVHQUlkM0ZLIeIouwjRPN6AzPDM_w:1vPJFl:zV3GtCr9kShp2ekXbJs0wzWmYlUC1xoqx4i3IEwHHqo",
+    "expire_date": "2025-12-13T11:36:37.800Z"
+  }
+},
+{
+  "model": "fefu_lab.student",
+  "pk": 1,
+  "fields": {
+    "user": null,
+    "first_name": "Анна",
+    "last_name": "Иванова",
+    "email": "anna.ivanova@fefu.ru",
+    "birth_date": "2000-05-15",
+    "faculty": "CS",
+    "phone": "",
+    "avatar": "",
+    "bio": "",
+    "role": "STUDENT",
+    "created_at": "2025-11-16T11:12:29.797Z"
+  }
+},
+{
+  "model": "fefu_lab.student",
+  "pk": 2,
+  "fields": {
+    "user": null,
+    "first_name": "Дмитрий",
+    "last_name": "Смирнов",
+    "email": "dmitry.smirnov@fefu.ru",
+    "birth_date": "1999-08-22",
+    "faculty": "SE",
+    "phone": "",
+    "avatar": "",
+    "bio": "",
+    "role": "STUDENT",
+    "created_at": "2025-11-16T11:12:29.798Z"
+  }
+},
+{
+  "model": "fefu_lab.student",
+  "pk": 3,
+  "fields": {
+    "user": null,
+    "first_name": "Екатерина",
+    "last_name": "Попова",
+    "email": "ekaterina.popova@fefu.ru",
+    "birth_date": "2001-03-10",
+    "faculty": "IT",
+    "phone": "",
+    "avatar": "",
+    "bio": "",
+    "role": "STUDENT",
+    "created_at": "2025-11-16T11:12:29.798Z"
+  }
+},
+{
+  "model": "fefu_lab.student",
+  "pk": 4,
+  "fields": {
+    "user": null,
+    "first_name": "Михаил",
+    "last_name": "Васильев",
+    "email": "mikhail.vasilyev@fefu.ru",
+    "birth_date": "2000-11-05",
+    "faculty": "DS",
+    "phone": "",
+    "avatar": "",
+    "bio": "",
+    "role": "STUDENT",
+    "created_at": "2025-11-16T11:12:29.799Z"
+  }
+},
+{
+  "model": "fefu_lab.student",
+  "pk": 5,
+  "fields": {
+    "user": null,
+    "first_name": "Ольга",
+    "last_name": "Новикова",
+    "email": "olga.novikova@fefu.ru",
+    "birth_date": "1999-12-30",
+    "faculty": "WEB",
+    "phone": "",
+    "avatar": "",
+    "bio": "",
+    "role": "STUDENT",
+    "created_at": "2025-11-16T11:12:29.800Z"
+  }
+},
+{
+  "model": "fefu_lab.student",
+  "pk": 6,
+  "fields": {
+    "user": null,
+    "first_name": "refewfe",
+    "last_name": "sfvdsfvs",
+    "email": "sdfv.sfs@gmail.com",
+    "birth_date": "2001-01-01",
+    "faculty": "CS",
+    "phone": "",
+    "avatar": "",
+    "bio": "",
+    "role": "STUDENT",
+    "created_at": "2025-11-16T11:17:03.190Z"
+  }
+},
+{
+  "model": "fefu_lab.student",
+  "pk": 7,
+  "fields": {
+    "user": null,
+    "first_name": "srtg",
+    "last_name": "dfgdg",
+    "email": "asd.sadfdf@esf.ru",
+    "birth_date": "1111-11-11",
+    "faculty": "CS",
+    "phone": "",
+    "avatar": "",
+    "bio": "",
+    "role": "STUDENT",
+    "created_at": "2025-11-16T11:26:55.207Z"
+  }
+},
+{
+  "model": "fefu_lab.student",
+  "pk": 8,
+  "fields": {
+    "user": null,
+    "first_name": "sdfgsrf",
+    "last_name": "sdfggrsf",
+    "email": "dfvd.rtgrs@efesf.com",
+    "birth_date": "1111-11-11",
+    "faculty": "CS",
+    "phone": "",
+    "avatar": "",
+    "bio": "",
+    "role": "STUDENT",
+    "created_at": "2025-11-16T11:36:29.768Z"
+  }
+},
+{
+  "model": "fefu_lab.student",
+  "pk": 9,
+  "fields": {
+    "user": 2,
+    "first_name": "Андрей",
+    "last_name": "Администраторов",
+    "email": "admin@fefu.ru",
+    "birth_date": null,
+    "faculty": "CS",
+    "phone": "",
+    "avatar": "",
+    "bio": "",
+    "role": "ADMIN",
+    "created_at": "2025-11-29T10:49:22.379Z"
+  }
+},
+{
+  "model": "fefu_lab.student",
+  "pk": 10,
+  "fields": {
+    "user": 3,
+    "first_name": "Иван",
+    "last_name": "Петров",
+    "email": "teacher1@fefu.ru",
+    "birth_date": null,
+    "faculty": "CS",
+    "phone": "",
+    "avatar": "",
+    "bio": "",
+    "role": "TEACHER",
+    "created_at": "2025-11-29T10:49:22.800Z"
+  }
+},
+{
+  "model": "fefu_lab.student",
+  "pk": 11,
+  "fields": {
+    "user": 4,
+    "first_name": "Мария",
+    "last_name": "Сидорова",
+    "email": "teacher2@fefu.ru",
+    "birth_date": null,
+    "faculty": "CS",
+    "phone": "",
+    "avatar": "",
+    "bio": "",
+    "role": "TEACHER",
+    "created_at": "2025-11-29T10:49:23.228Z"
+  }
+},
+{
+  "model": "fefu_lab.student",
+  "pk": 12,
+  "fields": {
+    "user": 5,
+    "first_name": "Анна",
+    "last_name": "Иванова",
+    "email": "student1@fefu.ru",
+    "birth_date": null,
+    "faculty": "CS",
+    "phone": "",
+    "avatar": "",
+    "bio": "",
+    "role": "STUDENT",
+    "created_at": "2025-11-29T10:49:23.657Z"
+  }
+},
+{
+  "model": "fefu_lab.student",
+  "pk": 13,
+  "fields": {
+    "user": 6,
+    "first_name": "Дмитрий",
+    "last_name": "Смирнов",
+    "email": "student2@fefu.ru",
+    "birth_date": null,
+    "faculty": "CS",
+    "phone": "",
+    "avatar": "",
+    "bio": "",
+    "role": "STUDENT",
+    "created_at": "2025-11-29T10:49:24.081Z"
+  }
+},
+{
+  "model": "fefu_lab.student",
+  "pk": 14,
+  "fields": {
+    "user": 1,
+    "first_name": "",
+    "last_name": "",
+    "email": "agyk.mkrtchan@gmail.com",
+    "birth_date": null,
+    "faculty": "CS",
+    "phone": "",
+    "avatar": "",
+    "bio": "",
+    "role": "STUDENT",
+    "created_at": "2025-11-29T11:35:13.347Z"
+  }
+},
+{
+  "model": "fefu_lab.instructor",
+  "pk": 1,
+  "fields": {
+    "first_name": "Иван",
+    "last_name": "Петров",
+    "email": "i.petrov@fefu.ru",
+    "specialization": "Кибербезопасность",
+    "degree": "Кандидат технических наук"
+  }
+},
+{
+  "model": "fefu_lab.instructor",
+  "pk": 2,
+  "fields": {
+    "first_name": "Мария",
+    "last_name": "Сидорова",
+    "email": "m.sidorova@fefu.ru",
+    "specialization": "Веб-разработка",
+    "degree": "Доктор технических наук"
+  }
+},
+{
+  "model": "fefu_lab.instructor",
+  "pk": 3,
+  "fields": {
+    "first_name": "Алексей",
+    "last_name": "Козлов",
+    "email": "a.kozlov@fefu.ru",
+    "specialization": "Сетевые технологии",
+    "degree": "Профессор"
+  }
+},
+{
+  "model": "fefu_lab.course",
+  "pk": 1,
+  "fields": {
+    "title": "Основы программирования на Python",
+    "slug": "python-basics",
+    "description": "Базовый курс по программированию на языке Python для начинающих.",
+    "duration": 36,
+    "instructor": 1,
+    "is_active": true,
+    "level": "BEGINNER",
+    "max_students": 25,
+    "price": "0.00",
+    "created_at": "2025-11-16T11:12:29.801Z"
+  }
+},
+{
+  "model": "fefu_lab.course",
+  "pk": 2,
+  "fields": {
+    "title": "Веб-безопасность",
+    "slug": "web-security",
+    "description": "Курс по защите веб-приложений от современных угроз.",
+    "duration": 48,
+    "instructor": 1,
+    "is_active": true,
+    "level": "ADVANCED",
+    "max_students": 20,
+    "price": "15000.00",
+    "created_at": "2025-11-16T11:12:29.802Z"
+  }
+},
+{
+  "model": "fefu_lab.course",
+  "pk": 3,
+  "fields": {
+    "title": "Современный JavaScript",
+    "slug": "modern-javascript",
+    "description": "Изучение современных возможностей JavaScript.",
+    "duration": 42,
+    "instructor": 2,
+    "is_active": true,
+    "level": "INTERMEDIATE",
+    "max_students": 30,
+    "price": "12000.00",
+    "created_at": "2025-11-16T11:12:29.803Z"
+  }
+},
+{
+  "model": "fefu_lab.course",
+  "pk": 4,
+  "fields": {
+    "title": "Защита компьютерных сетей",
+    "slug": "network-defense",
+    "description": "Изучение методов и технологий защиты компьютерных сетей.",
+    "duration": 40,
+    "instructor": 3,
+    "is_active": true,
+    "level": "ADVANCED",
+    "max_students": 15,
+    "price": "18000.00",
+    "created_at": "2025-11-16T11:12:29.804Z"
+  }
+},
+{
+  "model": "fefu_lab.enrollment",
+  "pk": 1,
+  "fields": {
+    "student": 1,
+    "course": 1,
+    "enrolled_at": "2025-11-16T11:12:29.805Z",
+    "status": "ACTIVE"
+  }
+},
+{
+  "model": "fefu_lab.enrollment",
+  "pk": 2,
+  "fields": {
+    "student": 1,
+    "course": 2,
+    "enrolled_at": "2025-11-16T11:12:29.806Z",
+    "status": "ACTIVE"
+  }
+},
+{
+  "model": "fefu_lab.enrollment",
+  "pk": 3,
+  "fields": {
+    "student": 2,
+    "course": 1,
+    "enrolled_at": "2025-11-16T11:12:29.807Z",
+    "status": "ACTIVE"
+  }
+},
+{
+  "model": "fefu_lab.enrollment",
+  "pk": 4,
+  "fields": {
+    "student": 2,
+    "course": 3,
+    "enrolled_at": "2025-11-16T11:12:29.808Z",
+    "status": "ACTIVE"
+  }
+},
+{
+  "model": "fefu_lab.enrollment",
+  "pk": 5,
+  "fields": {
+    "student": 3,
+    "course": 1,
+    "enrolled_at": "2025-11-16T11:12:29.809Z",
+    "status": "ACTIVE"
+  }
+},
+{
+  "model": "fefu_lab.enrollment",
+  "pk": 6,
+  "fields": {
+    "student": 4,
+    "course": 4,
+    "enrolled_at": "2025-11-16T11:12:29.810Z",
+    "status": "ACTIVE"
+  }
+},
+{
+  "model": "fefu_lab.enrollment",
+  "pk": 7,
+  "fields": {
+    "student": 5,
+    "course": 3,
+    "enrolled_at": "2025-11-16T11:12:29.810Z",
+    "status": "ACTIVE"
+  }
+}
+]

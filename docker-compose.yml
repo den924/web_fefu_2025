@@ -1,0 +1,121 @@
+version: '3.8'
+
+
+
+services:
+
+  db:
+
+    image: postgres:15-alpine
+
+    container_name: feu_lab_db
+
+    environment:
+
+      POSTGRES_DB: fefu_lab
+
+      POSTGRES_USER: fefu_user
+
+      POSTGRES_PASSWORD: fefu_password
+
+    volumes:
+
+      - postgres_data:/var/lib/postgresql/data
+
+    healthcheck:
+
+      test: ["CMD-SHELL", "pg_isready -U fefu_user"]
+
+      interval: 10s
+
+      timeout: 5s
+
+      retries: 5
+
+  web:
+
+    build: ./django
+
+    container_name: feu_lab_web
+
+    command: /app/entrypoint.sh python manage.py runserver 0.0.0.0:8000
+
+    volumes:
+
+      - ./django:/app
+
+      - static_volume:/app/static
+
+      - media_volume:/app/media
+
+    environment:
+
+      DATABASE_URL: postgres://fefu_user:fefu_password@db:5432/fefu_lab
+
+      DJANGO_SETTINGS_MODULE: web_2025.settings
+
+      DJANGO_DEBUG: "True"
+
+    depends_on:
+
+      db:
+
+        condition: service_healthy
+
+    ports:
+
+      - "8001:8000"
+
+    stdin_open: true
+
+    tty: true
+    healthcheck:
+
+      test: ["CMD", "curl", "-f", "http://localhost:8000/"]
+
+      interval: 30s
+
+      timeout: 10s
+
+      retries: 3
+
+      start_period: 40s
+
+
+  nginx:
+
+    build: ./nginx
+
+    container_name: feu_lab_nginx
+
+    ports:
+
+      - "8080:80"
+
+    volumes:
+
+      - static_volume:/app/static:ro
+
+      - media_volume:/app/media:ro
+
+    depends_on:
+
+      - web
+    healthcheck:
+
+      test: ["CMD", "curl", "-f", "http://localhost/"]
+
+      interval: 30s
+
+      timeout: 3s
+
+      retries: 3
+
+
+volumes:
+
+  postgres_data:
+
+  static_volume:
+
+  media_volume:

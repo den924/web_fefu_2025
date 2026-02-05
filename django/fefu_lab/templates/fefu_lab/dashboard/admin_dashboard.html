@@ -1,0 +1,24 @@
+{% extends "fefu_lab/base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>Панель администратора</h1>
+    
+    <div class="admin-links">
+        <a href="/admin/" class="admin-link">
+            <h3>Админка Django</h3>
+            <p>Полный доступ к управлению данными</p>
+        </a>
+        
+        <a href="{% url 'student_list' %}" class="admin-link">
+            <h3>Управление студентами</h3>
+            <p>Просмотр и редактирование студентов</p>
+        </a>
+        
+        <a href="{% url 'course_list' %}" class="admin-link">
+            <h3>Управление курсами</h3>
+            <p>Создание и редактирование курсов</p>
+        </a>
+    </div>
+</div>
+{% endblock %}
