@@ -1,0 +1,166 @@
+{% extends 'fefu_lab/base.html' %}
+
+{% block title %}Список студентов | FEFU Lab{% endblock %}
+
+{% block extra_css %}
+<style>
+    .filter-buttons {
+        display: flex;
+        gap: 10px;
+        margin: 20px 0;
+        flex-wrap: wrap;
+    }
+    
+    .filter-btn {
+        padding: 8px 20px;
+        border: 2px solid #667eea;
+        background: white;
+        color: #667eea;
+        border-radius: 20px;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s;
+    }
+    
+    .filter-btn:hover, .filter-btn.active {
+        background: #667eea;
+        color: white;
+    }
+    
+    .students-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .students-table th {
+        background: #667eea;
+        color: white;
+        padding: 15px;
+        text-align: left;
+        font-weight: 600;
+    }
+    
+    .students-table td {
+        padding: 15px;
+        border-bottom: 1px solid #eee;
+    }
+    
+    .students-table tr:hover {
+        background: #f8f9fa;
+    }
+    
+    .student-link {
+        color: #667eea;
+        text-decoration: none;
+        font-weight: 500;
+    }
+    
+    .student-link:hover {
+        text-decoration: underline;
+    }
+    
+    .faculty-badge {
+        display: inline-block;
+        padding: 4px 12px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 500;
+    }
+    
+    .stats-card {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 20px;
+        border-radius: 15px;
+        margin-bottom: 30px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    <h1>👨‍🎓 Список студентов</h1>
+    
+    <div class="stats-card">
+        <h2 style="color: white;">Всего студентов: {{ total_students }}</h2>
+        <p>Активные студенты ДВФУ</p>
+    </div>
+    
+    <div class="filter-buttons">
+        <a href="{% url 'student_list' %}" class="filter-btn {% if not faculty_filter %}active{% endif %}">
+            Все факультеты
+        </a>
+        <a href="{% url 'student_list' %}?faculty=CS" class="filter-btn {% if faculty_filter == 'CS' %}active{% endif %}">
+            Кибербезопасность
+        </a>
+        <a href="{% url 'student_list' %}?faculty=SE" class="filter-btn {% if faculty_filter == 'SE' %}active{% endif %}">
+            Программная инженерия
+        </a>
+        <a href="{% url 'student_list' %}?faculty=IT" class="filter-btn {% if faculty_filter == 'IT' %}active{% endif %}">
+            Информационные технологии
+        </a>
+        <a href="{% url 'student_list' %}?faculty=DS" class="filter-btn {% if faculty_filter == 'DS' %}active{% endif %}">
+            Наука о данных
+        </a>
+        <a href="{% url 'student_list' %}?faculty=WEB" class="filter-btn {% if faculty_filter == 'WEB' %}active{% endif %}">
+            Веб-технологии
+        </a>
+    </div>
+    
+    {% if students %}
+    <table class="students-table">
+        <thead>
+            <tr>
+                <th>ФИО</th>
+                <th>Email</th>
+                <th>Факультет</th>
+                <th>Курс</th>
+                <th>Средний балл</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in students %}
+            <tr>
+                <td>
+                    <strong>{{ student.last_name }} {{ student.first_name }}</strong>
+                </td>
+                <td>{{ student.email }}</td>
+                <td>
+                    <span class="faculty-badge" style="background: {% cycle '#e3f2fd' '#f3e5f5' '#e8f5e8' '#fff3e0' '#fce4ec' %}; color: {% cycle '#1565c0' '#7b1fa2' '#2e7d32' '#ef6c00' '#c2185b' %};">
+                        {{ student.get_faculty_display_name }}
+                    </span>
+                </td>
+                <td>{{ student.year }} курс</td>
+                <td>
+                    <span style="font-weight: bold; color: {% if student.gpa >= 4.5 %}#4caf50{% elif student.gpa >= 3.5 %}#ff9800{% else %}#f44336{% endif %};">
+                        {{ student.gpa }}
+                    </span>
+                </td>
+                <td>
+                    <a href="{% url 'student_profile' student_id=student.pk %}" class="student-link">
+                        👁️ Просмотр
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <div style="margin-top: 30px; text-align: center;">
+        <a href="{% url 'home' %}" class="btn">🏠 На главную</a>
+        <a href="{% url 'enrollment_create' %}" class="btn" style="background: #4caf50;">📝 Запись на курс</a>
+    </div>
+    
+    {% else %}
+    <div class="card" style="text-align: center; padding: 40px;">
+        <h3>😕 Студенты не найдены</h3>
+        <p>Попробуйте выбрать другой факультет или добавьте студентов через админ-панель.</p>
+        <a href="{% url 'home' %}" class="btn">🏠 На главную</a>
+    </div>
+    {% endif %}
+{% endblock %}

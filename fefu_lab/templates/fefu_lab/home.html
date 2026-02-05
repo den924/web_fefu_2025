@@ -1,202 +1,78 @@
-{% extends 'fefu_lab/base.html' %}
+<!-- templates/fefu_lab/home.html -->
+{% extends "fefu_lab/base.html" %}
 
-{% block title %}Главная страница | FEFU Lab{% endblock %}
-
-{% block extra_css %}
-<style>
-    .search-container {
-        max-width: 600px;
-        margin: 30px auto;
-        padding: 20px;
-        background: white;
-        border-radius: 10px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    }
-    
-    .search-form {
-        display: flex;
-        gap: 10px;
-    }
-    
-    .search-input {
-        flex: 1;
-        padding: 12px 15px;
-        border: 2px solid #3498db;
-        border-radius: 8px;
-        font-size: 16px;
-        outline: none;
-        transition: border-color 0.3s;
-    }
-    
-    .search-input:focus {
-        border-color: #2980b9;
-        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
-    }
-    
-    .search-button {
-        background: #3498db;
-        color: white;
-        border: none;
-        padding: 12px 25px;
-        border-radius: 8px;
-        font-size: 16px;
-        cursor: pointer;
-        transition: background 0.3s;
-    }
-    
-    .search-button:hover {
-        background: #2980b9;
-    }
-    
-    .students-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-        gap: 20px;
-        margin-top: 30px;
-    }
-    
-    .student-card {
-        background: white;
-        border-radius: 10px;
-        padding: 20px;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        transition: transform 0.3s;
-        cursor: pointer;
-    }
-    
-    .student-card:hover {
-        transform: translateY(-5px);
-    }
-    
-    .student-avatar {
-        width: 60px;
-        height: 60px;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        font-size: 24px;
-        margin-bottom: 15px;
-    }
-    
-    .student-name {
-        font-size: 18px;
-        font-weight: bold;
-        color: #2c3e50;
-        margin-bottom: 5px;
-    }
-    
-    .student-id {
-        color: #7f8c8d;
-        font-size: 14px;
-    }
-    
-    .search-results {
-        margin-top: 30px;
-        padding: 20px;
-        background: #f8f9fa;
-        border-radius: 10px;
-    }
-    
-    .alert {
-        padding: 15px;
-        border-radius: 8px;
-        margin: 15px 0;
-    }
-    
-    .alert-success {
-        background: #d4edda;
-        color: #155724;
-        border: 1px solid #c3e6cb;
-    }
-    
-    .alert-error {
-        background: #f8d7da;
-        color: #721c24;
-        border: 1px solid #f5c6cb;
-    }
-</style>
-{% endblock %}
+{% block title %}Главная страница{% endblock %}
+{% block heading %}Добро пожаловать в учебную систему FEFU!{% endblock %}
 
 {% block content %}
-    <h1>🎓 Поиск студентов FEFU</h1>
+<div class="home-content">
+    <p>Это учебный проект по разработке веб-приложений на Django.</p>
+    <p>Проект создан в рамках изучения фреймворка Django.</p>
     
-    <div class="search-container">
-        <h2>🔍 Найти студента</h2>
-        <p>Введите имя и фамилию студента для поиска</p>
+    <div style="margin-top: 40px; padding: 20px; background-color: #f8f9fa; border-radius: 5px;">
+        <h3>Добро пожаловать на главную страницу!</h3>
+        <p><strong>Тема:</strong> Работа с шаблонами и формами в Django</p>
+        <p><strong>Цель:</strong> Освоить механизмы работы с шаблонами и веб-формами</p>
         
-        <form method="GET" action="{% url 'search_student' %}" class="search-form">
-            <input type="text" name="query" class="search-input" 
-                   placeholder="Например: Иван Иванов" 
-                   value="{{ search_query|default:'' }}"
-                   required>
-            <button type="submit" class="search-button">Найти</button>
-        </form>
-        
-        <div style="margin-top: 15px; color: #7f8c8d; font-size: 14px;">
-            <p>📌 <strong>Доступные студенты:</strong></p>
-            <p>• Иван Иванов (ID: 1)</p>
-            <p>• Мария Петрова (ID: 2)</p>
-            <p>• Алексей Сидоров (ID: 3)</p>
-        </div>
+        <h4 style="margin-top: 20px;">Выполненные задачи:</h4>
+        <ul>
+            <li>Созданы HTML-шаблоны для всех страниц</li>
+            <li>Статические файлы вынесены в отдельную директорию</li>
+            <li>Реализованы формы обратной связи и регистрации</li>
+            <li>Добавлена server-side валидация данных</li>
+            <li>Настроена защита от CSRF-атак</li>
+            <li>Интегрированы новые страницы в существующий проект</li>
+        </ul>
     </div>
     
-    {% if search_results %}
-    <div class="search-results">
-        <h2>📊 Результаты поиска для "{{ search_query }}"</h2>
-        
-        {% if search_results.success %}
-        <div class="alert alert-success">
-            ✅ Найден студент: <strong>{{ search_results.student.name }}</strong>
-            <div style="margin-top: 10px;">
-                <a href="{% url 'student_profile' student_id=search_results.student.id %}" class="btn">
-                    Перейти к профилю
-                </a>
+    <div style="margin-top: 30px;">
+        <h3>Доступные страницы:</h3>
+        <div class="card-container" style="display: flex; flex-wrap: wrap; gap: 20px; margin-top: 20px;">
+            <div style="flex: 1; min-width: 200px; padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
+                <h4>📝 Обратная связь</h4>
+                <p>Форма для отправки сообщений с валидацией данных.</p>
+                <a href="{% url 'feedback' %}">Перейти →</a>
+            </div>
+            
+            <div style="flex: 1; min-width: 200px; padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
+                <h4>👤 Регистрация</h4>
+                <p>Создание учетной записи с проверкой уникальности.</p>
+                <a href="{% url 'register' %}">Перейти →</a>
+            </div>
+            
+            <div style="flex: 1; min-width: 200px; padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
+                <h4>🔐 Вход в систему</h4>
+                <p>Авторизация пользователя с проверкой учетных данных.</p>
+                <a href="{% url 'login' %}">Перейти →</a>
             </div>
         </div>
-        {% else %}
-        <div class="alert alert-error">
-            ❌ Студент "{{ search_query }}" не найден
-            <p style="margin-top: 10px;">Попробуйте ввести имя полностью или выберите из списка ниже:</p>
-        </div>
-        {% endif %}
     </div>
-    {% endif %}
     
-    <div class="card">
-        <h2>👥 Все студенты</h2>
-        <p>Нажмите на карточку студента для перехода к профилю</p>
-        
-        <div class="students-grid">
-            {% for student in all_students %}
-            <a href="{% url 'student_profile' student_id=student.id %}" style="text-decoration: none;">
-                <div class="student-card">
-                    <div class="student-avatar">
-                        {% if student.id == 1 %}👨‍🎓{% endif %}
-                        {% if student.id == 2 %}👩‍🎓{% endif %}
-                        {% if student.id == 3 %}👨‍💻{% endif %}
-                    </div>
-                    <div class="student-name">{{ student.name }}</div>
-                    <div class="student-id">ID: {{ student.id }}</div>
-                    <div style="margin-top: 10px; color: #7f8c8d; font-size: 13px;">
-                        {{ student.faculty }}
-                    </div>
-                </div>
-            </a>
-            {% endfor %}
+    <div style="margin-top: 40px;">
+        <h3>Примеры данных:</h3>
+        <div style="display: flex; gap: 20px; margin-top: 15px;">
+            <div style="flex: 1;">
+                <h4>Студенты:</h4>
+                <ul>
+                    <li><a href="{% url 'student_profile' 1 %}">Иван Петров</a></li>
+                    <li><a href="{% url 'student_profile' 2 %}">Мария Сидорова</a></li>
+                    <li><a href="{% url 'student_profile' 3 %}">Алексей Козлов</a></li>
+                </ul>
+            </div>
+            
+            <div style="flex: 1;">
+                <h4>Курсы:</h4>
+                <ul>
+                    <li><a href="{% url 'course_detail' 'python-basics' %}">Основы Python</a></li>
+                    <li><a href="{% url 'course_detail' 'web-security' %}">Веб-безопасность</a></li>
+                    <li><a href="{% url 'course_detail' 'network-defense' %}">Защита сетей</a></li>
+                </ul>
+            </div>
         </div>
     </div>
     
-    <div class="card">
-        <h2>🎯 Цель лабораторной работы</h2>
-        <p>Освоить основы работы с веб-фреймворком Django: создать первое веб-приложение, 
-           реализовать систему маршрутизации URL и изучить работу представлений.</p>
-        
-        <div style="display: flex; gap: 10px; margin-top: 20px;">
-            <a href="{% url 'about' %}" class="btn">ℹ️ Подробнее о проекте</a>
-            <a href="{% url 'course_detail' course_slug='python-basics' %}" class="btn">📚 Курсы</a>
-        </div>
+    <div style="margin-top: 40px; padding: 15px; background-color: #e8f4f8; border-left: 4px solid #3498db;">
+        <p><strong>Примечание:</strong> Все формы защищены от CSRF-атак и включают server-side валидацию данных.</p>
     </div>
+</div>
 {% endblock %}

@@ -1,0 +1,173 @@
+<!-- fefu_lab/templates/fefu_lab/registration/profile.html -->
+{% extends "fefu_lab/base.html" %}
+
+{% block title %}Личный кабинет{% endblock %}
+{% block heading %}Личный кабинет{% endblock %}
+
+{% block content %}
+<div class="container">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}" 
+                 style="padding: 15px; margin-bottom: 20px; border-radius: 5px;
+                        {% if message.tags == 'success' %}background: #d4edda; color: #155724; border: 1px solid #c3e6cb;
+                        {% elif message.tags == 'error' %}background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb;
+                        {% else %}background: #e7f3ff; color: #004085; border: 1px solid #b8daff;{% endif %}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    
+    <div class="profile-header" style="display: flex; align-items: center; gap: 30px; margin-bottom: 40px; padding: 30px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 15px; color: white;">
+        <div style="flex-shrink: 0;">
+            <div style="width: 120px; height: 120px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 50px; color: #667eea; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
+                {% if student_profile and student_profile.avatar %}
+                    <img src="{{ student_profile.avatar.url }}" alt="Аватар" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+                {% else %}
+                    {{ user.first_name|first|upper }}{{ user.last_name|first|upper }}
+                {% endif %}
+            </div>
+        </div>
+        
+        <div style="flex-grow: 1;">
+            <h1 style="color: white; margin: 0 0 10px 0;">
+                {% if user.get_full_name %}
+                    {{ user.get_full_name }}
+                {% else %}
+                    {{ user.username }}
+                {% endif %}
+            </h1>
+            
+            <div style="display: flex; gap: 15px; margin-bottom: 15px;">
+                <span style="background: rgba(255,255,255,0.2); padding: 5px 15px; border-radius: 20px; font-size: 14px;">
+                    {{ user.email }}
+                </span>
+                
+                {% if student_profile %}
+                    <span style="background: rgba(255,255,255,0.2); padding: 5px 15px; border-radius: 20px; font-size: 14px;">
+                        {{ student_profile.get_role_display_name }}
+                    </span>
+                    
+                    {% if student_profile.faculty %}
+                    <span style="background: rgba(255,255,255,0.2); padding: 5px 15px; border-radius: 20px; font-size: 14px;">
+                        {{ student_profile.get_faculty_display_name }}
+                    </span>
+                    {% endif %}
+                {% endif %}
+            </div>
+            
+            <p style="opacity: 0.9; margin: 0;">
+                Добро пожаловать в личный кабинет!
+            </p>
+        </div>
+    </div>
+    
+    <!-- Панель управления -->
+    <div class="dashboard-cards" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-bottom: 40px;">
+        {% if is_student %}
+        <div class="card" style="padding: 25px; border-radius: 10px; background: white; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+            <h3 style="color: #667eea; margin-top: 0;">👨🎓 Студент</h3>
+            <p>Доступ к функциям для студентов:</p>
+            <ul style="padding-left: 20px;">
+                <li>Просмотр записанных курсов</li>
+                <li>Запись на новые курсы</li>
+                <li>Просмотр оценок</li>
+                <li>Редактирование профиля</li>
+            </ul>
+            <div style="margin-top: 20px;">
+                <a href="{% url 'student_dashboard' %}" class="btn" style="display: inline-block; padding: 10px 20px; background: #667eea; color: white; text-decoration: none; border-radius: 5px;">
+                    Перейти в кабинет студента
+                </a>
+            </div>
+        </div>
+        {% endif %}
+        
+        {% if is_teacher %}
+        <div class="card" style="padding: 25px; border-radius: 10px; background: white; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+            <h3 style="color: #4CAF50; margin-top: 0;">👨🏫 Преподаватель</h3>
+            <p>Доступ к функциям для преподавателей:</p>
+            <ul style="padding-left: 20px;">
+                <li>Управление своими курсами</li>
+                <li>Просмотр списка студентов</li>
+                <li>Выставление оценок</li>
+                <li>Создание новых курсов</li>
+            </ul>
+            <div style="margin-top: 20px;">
+                <a href="{% url 'teacher_dashboard' %}" class="btn" style="display: inline-block; padding: 10px 20px; background: #4CAF50; color: white; text-decoration: none; border-radius: 5px;">
+                    Перейти в кабинет преподавателя
+                </a>
+            </div>
+        </div>
+        {% endif %}
+        
+        {% if is_admin %}
+        <div class="card" style="padding: 25px; border-radius: 10px; background: white; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+            <h3 style="color: #f44336; margin-top: 0;">👑 Администратор</h3>
+            <p>Доступ к функциям для администраторов:</p>
+            <ul style="padding-left: 20px;">
+                <li>Управление пользователями</li>
+                <li>Просмотр всей статистики</li>
+                <li>Доступ к админ-панели Django</li>
+                <li>Настройка системы</li>
+            </ul>
+            <div style="margin-top: 20px;">
+                <a href="{% url 'admin_dashboard' %}" class="btn" style="display: inline-block; padding: 10px 20px; background: #f44336; color: white; text-decoration: none; border-radius: 5px;">
+                    Перейти в панель администратора
+                </a>
+                <a href="/admin/" class="btn" style="display: inline-block; padding: 10px 20px; background: #9C27B0; color: white; text-decoration: none; border-radius: 5px; margin-left: 10px;">
+                    Админка Django
+                </a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    
+    <!-- Информация о профиле -->
+    <div class="profile-info" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 40px;">
+        <div class="info-card" style="padding: 20px; background: white; border-radius: 10px; box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+            <h4 style="color: #667eea; margin-top: 0;">📧 Контактная информация</h4>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            <p><strong>Имя:</strong> {{ user.first_name }}</p>
+            <p><strong>Фамилия:</strong> {{ user.last_name }}</p>
+            {% if student_profile and student_profile.phone %}
+                <p><strong>Телефон:</strong> {{ student_profile.phone }}</p>
+            {% endif %}
+        </div>
+        
+        {% if student_profile %}
+        <div class="info-card" style="padding: 20px; background: white; border-radius: 10px; box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+            <h4 style="color: #4CAF50; margin-top: 0;">🎓 Академическая информация</h4>
+            <p><strong>Роль:</strong> {{ student_profile.get_role_display_name }}</p>
+            <p><strong>Факультет:</strong> {{ student_profile.get_faculty_display_name }}</p>
+            <p><strong>Курс:</strong> {{ student_profile.year }}</p>
+            <p><strong>Средний балл:</strong> {{ student_profile.gpa }}</p>
+        </div>
+        {% endif %}
+        
+        <div class="info-card" style="padding: 20px; background: white; border-radius: 10px; box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+            <h4 style="color: #FF9800; margin-top: 0;">⚙️ Управление аккаунтом</h4>
+            <p><strong>Дата регистрации:</strong> {{ user.date_joined|date:"d.m.Y" }}</p>
+            <p><strong>Последний вход:</strong> {{ user.last_login|date:"d.m.Y H:i"|default:"-" }}</p>
+            <p><strong>Статус:</strong> {% if user.is_active %}Активен{% else %}Неактивен{% endif %}</p>
+        </div>
+    </div>
+    
+    <!-- Действия -->
+    <div style="text-align: center; padding: 30px; background: #f8f9fa; border-radius: 10px;">
+        <h3>Действия</h3>
+        <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 20px;">
+            <a href="{% url 'profile_edit' %}" class="btn" style="display: inline-block; padding: 12px 25px; background: #2196F3; color: white; text-decoration: none; border-radius: 5px;">
+                ✏️ Редактировать профиль
+            </a>
+            
+            <a href="{% url 'logout' %}" class="btn" style="display: inline-block; padding: 12px 25px; background: #f44336; color: white; text-decoration: none; border-radius: 5px;">
+                🚪 Выйти из системы
+            </a>
+            
+            <a href="{% url 'home' %}" class="btn" style="display: inline-block; padding: 12px 25px; background: #9C27B0; color: white; text-decoration: none; border-radius: 5px;">
+                🏠 На главную
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

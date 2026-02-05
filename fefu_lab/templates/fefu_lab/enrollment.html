@@ -1,0 +1,162 @@
+{% extends 'fefu_lab/base.html' %}
+
+{% block title %}Запись на курс | FEFU Lab{% endblock %}
+
+{% block extra_css %}
+<style>
+    .form-container {
+        max-width: 800px;
+        margin: 0 auto;
+        background: white;
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    
+    .form-group {
+        margin-bottom: 25px;
+    }
+    
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #333;
+    }
+    
+    .form-control {
+        width: 100%;
+        padding: 12px 15px;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        font-size: 16px;
+        transition: all 0.3s;
+    }
+    
+    .form-control:focus {
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+        outline: none;
+    }
+    
+    .form-select {
+        width: 100%;
+        padding: 12px 15px;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        font-size: 16px;
+        background-color: white;
+        cursor: pointer;
+    }
+    
+    .error-message {
+        color: #dc3545;
+        font-size: 14px;
+        margin-top: 5px;
+    }
+    
+    .alert {
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+    }
+    
+    .alert-success {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+    
+    .alert-error {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    <h1>📝 Запись студента на курс</h1>
+    
+    <div class="form-container">
+        {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        {% endif %}
+        
+        <form method="post">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="id_student">Студент *</label>
+                <select name="student" id="id_student" class="form-select" required>
+                    <option value="">Выберите студента...</option>
+                    {% for student in students %}
+                    <option value="{{ student.pk }}">{{ student.last_name }} {{ student.first_name }} ({{ student.email }})</option>
+                    {% endfor %}
+                </select>
+                {% if form.student.errors %}
+                <div class="error-message">{{ form.student.errors }}</div>
+                {% endif %}
+            </div>
+            
+            <div class="form-group">
+                <label for="id_course">Курс *</label>
+                <select name="course" id="id_course" class="form-select" required>
+                    <option value="">Выберите курс...</option>
+                    {% for course in courses %}
+                    <option value="{{ course.pk }}">{{ course.title }} ({{ course.get_level_display }}) - {{ course.duration }}ч</option>
+                    {% endfor %}
+                </select>
+                {% if form.course.errors %}
+                <div class="error-message">{{ form.course.errors }}</div>
+                {% endif %}
+            </div>
+            
+            <div class="form-group">
+                <label for="id_status">Статус записи</label>
+                <select name="status" id="id_status" class="form-select">
+                    {% for value, label in form.fields.status.choices %}
+                    <option value="{{ value }}">{{ label }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <div style="display: flex; gap: 15px; margin-top: 30px;">
+                <button type="submit" class="btn" style="flex: 1; background: #4caf50;">
+                    📋 Записать на курс
+                </button>
+                <a href="{% url 'home' %}" class="btn" style="flex: 1; background: #6c757d;">
+                    🏠 На главную
+                </a>
+            </div>
+        </form>
+        
+        <div style="margin-top: 40px; background: #f8f9fa; padding: 20px; border-radius: 10px;">
+            <h3>📊 Статистика</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 15px;">
+                <div style="text-align: center;">
+                    <div style="font-size: 24px; font-weight: bold; color: #667eea;">
+                        {{ students.count }}
+                    </div>
+                    <div>Студентов доступно</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 24px; font-weight: bold; color: #4caf50;">
+                        {{ courses.count }}
+                    </div>
+                    <div>Курсов доступно</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 24px; font-weight: bold; color: #ff9800;">
+                        {% with total=students.count|add:courses.count %}{{ total }}{% endwith %}
+                    </div>
+                    <div>Всего записей возможно</div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

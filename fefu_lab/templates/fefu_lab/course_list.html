@@ -1,0 +1,156 @@
+{% extends 'fefu_lab/base.html' %}
+
+{% block title %}Список курсов | FEFU Lab{% endblock %}
+
+{% block extra_css %}
+<style>
+    .courses-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 25px;
+        margin: 30px 0;
+    }
+    
+    .course-card {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        transition: all 0.3s;
+        border: 1px solid #e0e0e0;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .course-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    }
+    
+    .course-header {
+        border-bottom: 3px solid #667eea;
+        padding-bottom: 15px;
+        margin-bottom: 20px;
+    }
+    
+    .course-meta {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 15px;
+        font-size: 14px;
+        color: #666;
+    }
+    
+    .level-badge {
+        display: inline-block;
+        padding: 4px 12px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 500;
+        margin-top: 10px;
+    }
+    
+    .level-beginner { background: #e8f5e8; color: #2e7d32; }
+    .level-intermediate { background: #fff3e0; color: #ef6c00; }
+    .level-advanced { background: #fce4ec; color: #c2185b; }
+    
+    .spots-info {
+        background: #f8f9fa;
+        padding: 10px;
+        border-radius: 8px;
+        margin-top: 15px;
+        text-align: center;
+    }
+    
+    .spots-available { color: #4caf50; font-weight: bold; }
+    .spots-full { color: #f44336; font-weight: bold; }
+</style>
+{% endblock %}
+
+{% block content %}
+    <h1>📚 Список курсов</h1>
+    
+    <div class="stats-card" style="background: linear-gradient(135deg, #4caf50 0%, #2e7d32 100%);">
+        <h2 style="color: white;">Всего курсов: {{ total_courses }}</h2>
+        <p>Активные курсы ДВФУ</p>
+    </div>
+    
+    <div class="filter-buttons">
+        <a href="{% url 'course_list' %}" class="filter-btn {% if not level_filter %}active{% endif %}">
+            Все уровни
+        </a>
+        <a href="{% url 'course_list' %}?level=BEGINNER" class="filter-btn {% if level_filter == 'BEGINNER' %}active{% endif %}">
+            Начальный
+        </a>
+        <a href="{% url 'course_list' %}?level=INTERMEDIATE" class="filter-btn {% if level_filter == 'INTERMEDIATE' %}active{% endif %}">
+            Средний
+        </a>
+        <a href="{% url 'course_list' %}?level=ADVANCED" class="filter-btn {% if level_filter == 'ADVANCED' %}active{% endif %}">
+            Продвинутый
+        </a>
+    </div>
+    
+    {% if courses %}
+    <div class="courses-grid">
+        {% for course in courses %}
+        <div class="course-card">
+            <div class="course-header">
+                <h3>{{ course.title }}</h3>
+                <span class="level-badge level-{{ course.level|lower }}">
+                    {{ course.get_level_display }}
+                </span>
+            </div>
+            
+            <p style="flex: 1; color: #555; line-height: 1.6;">
+                {{ course.description|truncatewords:30 }}
+            </p>
+            
+            <div class="course-meta">
+                <div>
+                    <div>🕐 {{ course.duration }} часов</div>
+                    <div>👨‍🏫 {% if course.instructor %}{{ course.instructor.full_name }}{% else %}Не назначен{% endif %}</div>
+                </div>
+                <div style="text-align: right;">
+                    <div><strong>{{ course.price }} ₽</strong></div>
+                    <div>{{ course.max_students }} мест</div>
+                </div>
+            </div>
+            
+            <div class="spots-info">
+                {% with available=course.available_spots %}
+                <span class="{% if available > 0 %}spots-available{% else %}spots-full{% endif %}">
+                    {% if available > 0 %}
+                    ✅ {{ available }} свободных мест
+                    {% else %}
+                    ❌ Мест нет
+                    {% endif %}
+                </span>
+                {% endwith %}
+            </div>
+            
+            <div style="margin-top: 20px; display: flex; gap: 10px;">
+                <a href="{% url 'course_detail' course_slug=course.slug %}" class="btn" style="flex: 1;">
+                    Подробнее
+                </a>
+                <a href="{% url 'enrollment_create' %}" class="btn" style="background: #4caf50;">
+                    Записаться
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+    <div style="margin-top: 40px; text-align: center;">
+        <a href="{% url 'home' %}" class="btn">🏠 На главную</a>
+        <a href="{% url 'enrollment_create' %}" class="btn" style="background: #4caf50;">📝 Запись на курс</a>
+        <a href="{% url 'student_list' %}" class="btn">👨‍🎓 Список студентов</a>
+    </div>
+    
+    {% else %}
+    <div class="card" style="text-align: center; padding: 40px;">
+        <h3>😕 Курсы не найдены</h3>
+        <p>Попробуйте выбрать другой уровень или добавьте курсы через админ-панель.</p>
+        <a href="{% url 'home' %}" class="btn">🏠 На главную</a>
+    </div>
+    {% endif %}
+{% endblock %}
